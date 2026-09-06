@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form id="form" action="submit.php" method="POST">
+        <div>
+        <label for="name">Имя:</label>
+        <input type="text" name="name" required>
+        </div>
+        <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+        </div>
+        <div>
+        <label for="phone">Телефон:</label>
+        <input type="tel" name="phone" required>
+        </div>
+        <div>
+        <label for="price">Цена:</label>
+        <input type="number" name="price" required>
+        <input type="hidden" name="time_on_site" value="0"> 
+        </div>
+        <button type="submit">Отправить</button>
+        
+</form>
+
+<script>
+    let time30 = false;
+    setTimeout(() => { time30 = true;}, 30000);
+    document.getElementById('form').addEventListener('submit', function(e){
+        this.querySelector('input[name="time_on_site"]').value = time30 ? '1' : '0';
+    });
+
+</script>
+</body>
+</html>
