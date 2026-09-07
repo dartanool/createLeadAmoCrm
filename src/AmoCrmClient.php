@@ -53,6 +53,30 @@ Class AmoCrmClient{
         }
 
     }
+    public function createLead(int $contactId ,string $name, float $price){
+        try {
+            $response = $this->httpClient->post('leads',[
+                'json' => [
+                    [
+                        'name' => $name,
+                        'price' => $price,
+                        '_embedded' => [
+                            'contacts' => [
+                                [
+                                    'id' => $contactId,
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
 
-   
+            $data = json_decode($response->getBody(), true);
+            
+            return $data[0]['id'];
+        } catch (Requestexception $e) {
+            error_log('AmoCRM API error: '. $e->getMessage());
+            throw new \Exception('Failed to create lead');
+        }
+    }
 }
