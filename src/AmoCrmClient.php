@@ -23,11 +23,10 @@ Class AmoCrmClient{
         ]);
     }
 
-    public function createContact(string $name, string $email, string $phone){
-        // $phoneFieldId = (int)$_ENV['AMOCRM_PHONE_FIELD_ID'];
-        // $emailFieldId = (int)$_ENV['AMOCRM_EMAIL_FIELD_ID'];
-        $phoneFieldId=2257127;
-        $emailFieldId=2257129;
+    public function createContact(string $name, string $email, string $phone) : int
+    {
+        $phoneFieldId = (int)$_ENV['AMOCRM_PHONE_FIELD_ID'];
+        $emailFieldId = (int)$_ENV['AMOCRM_EMAIL_FIELD_ID'];
         try {
             $response = $this->httpClient->post('contacts',[
                 'json' => [
@@ -60,9 +59,10 @@ Class AmoCrmClient{
             }
             throw new \Exception('Failed to create contact');
         }
-
     }
-    public function createLead(int $contactId , float $price, int $timeOnSite){
+
+    public function createLead(int $contactId , float $price, int $timeOnSite) : int
+    {
     $timeFieldId = (int)$_ENV['AMOCRM_TIME_FIELD_ID'];
 
         try {

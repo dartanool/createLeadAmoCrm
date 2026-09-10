@@ -14,12 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST"){
     exit('Method not allowed');
 }
 
-$name = $_POST['name'] ?? '';
-$email = $_POST['email'] ?? '';
-$phone = $_POST['phone'] ?? '';
-$price = $_POST['price'] ?? '';
-$timeOnSite = $_POST['time_on_site'] ?? '0';
-
 $validator = new LeadRequestValidator();
 $result = $validator->validate($_POST);
 
@@ -36,6 +30,12 @@ if ($result['errors'] !== []) {
 }
 
 $data = $result['data'];
+
+$name = $data['name'];
+$email = $data['email'];
+$phone = $data['phone'];
+$price = $data['price'];
+$timeOnSite = $data['time_on_site'];
 
 try {
     $client = new AmoCrmClient();
